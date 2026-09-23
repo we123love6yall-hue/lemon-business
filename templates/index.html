@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f9fc">
+  <meta name="description" content="NOVA CARRY — Blox Fruits carry, raid, leveling, sword, gun, V4 and trade assistance.">
+  <title>{{ shop_name }} — Blox Fruits Services</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="page-glow"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="{{ shop_name }} home">
+      <span class="brand-mark">
+        <span class="brand-orb"></span>
+      </span>
+      <span class="brand-text">
+        <strong>{{ shop_name }}</strong>
+        <small>unofficial fan-made service</small>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#services">SERVICES</a>
+      <a href="#how">HOW IT WORKS</a>
+      <a href="#about">ABOUT</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="mini-cart" id="openCartBtn" type="button" aria-label="Open cart">
+        BAG <span id="cartCount">0</span>
+      </button>
+      <a class="header-cta" href="#services">EXPLORE NOW <span>↗</span></a>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span></span> BLOX FRUITS SERVICE HUB</div>
+        <h1>GET IT DONE.<br><em>GET IT FAST.</em></h1>
+        <p class="hero-sub">
+          Raid carries, level joki, sword & gun unlocks, Race V4 and trade assistance —
+          packed into one clean order flow.
+        </p>
+        <div class="hero-buttons">
+          <a class="primary-btn" href="#services">VIEW SERVICES <span>↗</span></a>
+          <a class="text-btn" href="#how">HOW IT WORKS <span>↓</span></a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>08+</strong><span>service types</span></div>
+          <div><strong>RM1+</strong><span>starting price</span></div>
+          <div><strong>24/7</strong><span>order intake</span></div>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="hero-card card-back">
+          <span>QUEST</span>
+          <b>COMPLETE</b>
+          <i>+ XP</i>
+        </div>
+        <div class="hero-card card-front">
+          <div class="card-icon">✦</div>
+          <div>
+            <span>NOW SERVING</span>
+            <b>RAIDS + V4 + JOKI</b>
+          </div>
+          <div class="card-arrow">↗</div>
+        </div>
+        <div class="blade-shape"></div>
+        <div class="floating-dot dot-a"></div>
+        <div class="floating-dot dot-b"></div>
+        <div class="floating-dot dot-c"></div>
+        <div class="glow-ring"></div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="Service highlights">
+      <div>RAID CARRY</div><span>✦</span>
+      <div>LEVEL JOKI</div><span>✦</span>
+      <div>SWORD & GUN</div><span>✦</span>
+      <div>RACE V4</div><span>✦</span>
+      <div>TRADE ASSIST</div>
+    </section>
+
+    <section class="services-section" id="services">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow"><span></span> SHOP</div>
+          <h2>Choose your <em>mission.</em></h2>
+        </div>
+        <p>Transparent starter pricing. Select a service, add it to your bag, then generate your order.</p>
+      </div>
+
+      <div class="filter-row" role="tablist" aria-label="Service categories">
+        <button class="filter active" data-filter="all">ALL</button>
+        <button class="filter" data-filter="raids">RAIDS</button>
+        <button class="filter" data-filter="leveling">JOKI LEVEL</button>
+        <button class="filter" data-filter="swords">SWORD</button>
+        <button class="filter" data-filter="guns">GUN</button>
+        <button class="filter" data-filter="v4">V4</button>
+        <button class="filter" data-filter="trade">TRADE</button>
+      </div>
+
+      <div class="service-grid" id="serviceGrid">
+        {% for service in services %}
+        <article
+          class="service-card"
+          data-category="{{ service.category }}"
+          data-id="{{ service.id }}"
+          data-title="{{ service.title }}"
+          data-price="{{ '%.2f'|format(service.price) }}"
+        >
+          <div class="service-visual {{ service.tone }}">
+            <span class="badge">{{ service.badge }}</span>
+            <span class="service-icon">{{ service.icon }}</span>
+            <span class="visual-code">{{ service.id.split('-')[0]|upper }}</span>
+          </div>
+          <div class="service-info">
+            <div>
+              <h3>{{ service.title }}</h3>
+              <p>{{ service.desc }}</p>
+            </div>
+            <div class="service-bottom">
+              <strong>RM {{ '%.2f'|format(service.price) }}</strong>
+              <button class="add-btn" type="button" data-add="{{ service.id }}">ADD +</button>
+            </div>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="how-section" id="how">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow"><span></span> SIMPLE FLOW</div>
+          <h2>Three moves. <em>Done.</em></h2>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <span>01</span>
+          <h3>Pick a service</h3>
+          <p>Add the carries or unlocks you need into the bag.</p>
+        </div>
+        <div class="step">
+          <span>02</span>
+          <h3>Generate order</h3>
+          <p>Enter your Roblox display name and optional notes. Never enter your password.</p>
+        </div>
+        <div class="step">
+          <span>03</span>
+          <h3>Pay + send order</h3>
+          <p>Use your TNG transfer/QR details, then send the generated order reference to the seller.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="about-panel">
+        <div>
+          <div class="eyebrow"><span></span> THE SHOP</div>
+          <h2>Made for players who want to <em>keep moving.</em></h2>
+        </div>
+        <div class="about-copy">
+          <p>
+            NOVA CARRY is a fan-made Blox Fruits service storefront concept. Prices on this demo
+            are editable examples, not official Roblox or Blox Fruits pricing.
+          </p>
+          <div class="safety-note">
+            <span>✓</span>
+            <div>
+              <strong>Account-safe order rule</strong>
+              <p>We do not need your Roblox password for a normal carry/trade assistance order.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>{{ shop_name }}</strong>
+      <span>Fan-made Blox Fruits service storefront</span>
+    </div>
+    <div class="footer-right">
+      <span>© <span id="year"></span> {{ shop_name }}</span>
+      <a href="#home">BACK TO TOP ↑</a>
+    </div>
+  </footer>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div>
+        <span class="drawer-kicker">YOUR BAG</span>
+        <h2>Order <em>ready?</em></h2>
+      </div>
+      <button class="close-btn" id="closeCartBtn" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="drawer-bottom">
+      <div class="total-row">
+        <span>TOTAL</span>
+        <strong id="cartTotal">RM 0.00</strong>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn" type="button">CHECKOUT →</button>
+      <p class="drawer-note">Checkout creates an order reference. Payment is manual until you add your own TNG payment destination.</p>
+    </div>
+  </aside>
+  <div class="drawer-scrim" id="drawerScrim"></div>
+
+  <div class="modal" id="checkoutModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="close-btn" id="closeCheckoutBtn" type="button" aria-label="Close">×</button>
+      <div class="eyebrow"><span></span> CHECKOUT</div>
+      <h2>Let's lock in the <em>order.</em></h2>
+      <p class="modal-intro">Use your Roblox display name only. Do not send your Roblox password.</p>
+
+      <form id="orderForm">
+        <label>
+          Roblox display name
+          <input id="customerName" name="customer" required maxlength="50" placeholder="YourDisplayName">
+        </label>
+        <label>
+          Notes
+          <textarea id="orderNotes" name="notes" maxlength="500" rows="4" placeholder="Example: Buddha raid, 5 runs. Race = Angel. Preferred time = 10pm."></textarea>
+        </label>
+        <button class="primary-btn full" type="submit">GENERATE ORDER <span>↗</span></button>
+      </form>
+
+      <div class="generated-order" id="generatedOrder" hidden>
+        <div class="success-pill">ORDER CREATED</div>
+        <h3 id="orderId">NOVA-000000-ABC123</h3>
+        <div class="order-summary" id="orderSummary"></div>
+        <div class="payment-box">
+          <div>
+            <span>PAYMENT METHOD</span>
+            <strong>Touch 'n Go (TNG)</strong>
+          </div>
+          <p id="paymentInfo">Add your TNG details in app.py before publishing.</p>
+          <a id="tngLink" class="payment-btn" href="#" target="_blank" rel="noopener">OPEN TNG PAYMENT ↗</a>
+        </div>
+        <div class="generated-actions">
+          <button class="secondary-btn" id="copyOrderBtn" type="button">COPY ORDER</button>
+          <a class="secondary-btn" id="whatsappBtn" href="#" target="_blank" rel="noopener" hidden>SEND WHATSAPP ↗</a>
+        </div>
+        <button class="reset-link" id="newOrderBtn" type="button">Create another order</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    window.SHOP_CONFIG = {
+      shopName: {{ shop_name|tojson }},
+      tngName: {{ tng_name|tojson }},
+      tngPaymentLink: {{ tng_payment_link|tojson }},
+      whatsappNumber: {{ whatsapp_number|tojson }}
+    };
+  </script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
